@@ -86,6 +86,8 @@ public interface Pedido {
    * Los posibles estados de los {@link Pedido pedidos}
    */
   public static enum Estado {
-    // FIXME: faltan estados
-  }
+    PEDIDA,
+    EN_PREPARACION,
+    TERMINADA,
+    ENTREGADA,  }
 }
