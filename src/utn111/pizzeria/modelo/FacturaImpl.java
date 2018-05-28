@@ -4,26 +4,26 @@ import java.util.Date;
 
 public class FacturaImpl implements Factura {
   private FacturaDao factura;
-  private ClienteDao clienteDao;
+  private PedidoImpl pedido;
 
-  public FacturaImpl(FacturaDao factura, ClienteDao clienteDao) {
+  public FacturaImpl(FacturaDao factura, PedidoImpl pedido) {
     this.factura = factura;
-    this.clienteDao = clienteDao;
+    this.pedido = pedido;
   }
 
   @Override
   public Cliente getCliente() {
-    return new ClienteImpl(clienteDao);
+    return pedido.getCliente();
   }
 
   @Override
   public Pedido getPedido() {
-    return new PedidoImpl();
+    return pedido;
   }
 
   @Override
   public Date getFechaDeCompra() {
-    return null;
+    return pedido.getPedidoALas();
   }
 
   @Override
