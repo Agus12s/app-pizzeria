@@ -16,6 +16,7 @@ import utn111.pizzeria.modelo.Pizza;
 import utn111.pizzeria.modelo.PizzaDao;
 import utn111.pizzeria.modelo.PizzaImpl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 public class PedidoImplTest {
@@ -27,9 +28,53 @@ public class PedidoImplTest {
     assertSame(cliente, pedido.getCliente());
   }
 
+  public void testGetTiempoEstimadoDeEspera() {
+    //FIXME agregar codigo junto al contenido del metodo getTiempoEstimadoEspera()
+  }
+
+  @Test
+  public void testPedidoAlmacenaFechaPedidoRealizadoCorrectamente() {
+    Date pedidoALas = getDate(10);
+    Date entregadoALas = getDate(40);
+    PedidoImpl pedido = createAndSetPedidoImpl(pedidoALas, entregadoALas);
+    assertSame(pedidoALas, pedido.getPedidoALas());
+  }
+
+  @Test
+  public void testPedidoAlmacenaFechaEntregadoCorrectamente() {
+    Date pedidoALas = getDate(10);
+    Date entregadoALas = getDate(40);
+    PedidoImpl pedido = createAndSetPedidoImpl(pedidoALas, entregadoALas);
+    assertSame(entregadoALas, pedido.getEntregadoALas());
+  }
+
+  @Test
+  public void testPedidoAlmacenaTodosLosItems() {
+    PedidoImpl pedido = createAndSetPedidoImpl();
+    Pedido.Item[] items = createItems(pedido);
+    pedido.setItems(items);
+    assertEquals(items.length, pedido.getItems().length);
+    assertSame(items, pedido.getItems());
+  }
+
+  private PedidoImpl createAndSetPedidoImpl(Date pedidoALas, Date entregadoALas) {
+    ClienteImpl cliente = new ClienteImpl(createDao());
+    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
+    pedido.setItems(createItems(pedido));
+    return pedido;
+  }
+
+  private PedidoImpl createAndSetPedidoImpl(Pedido.Item[] items){
+    ClienteImpl cliente = new ClienteImpl(createDao());
+    Date pedidoALas = getDate(10);
+    Date entregadoALas = getDate(40);
+    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
+    pedido.setItems(items);
+    return pedido;
+  }
+
   private PedidoImpl createAndSetPedidoImpl(){
-    ClienteDao clienteDao = new ClienteDao();
-    ClienteImpl cliente = new ClienteImpl(clienteDao);
+    ClienteImpl cliente = new ClienteImpl(createDao());
     Date pedidoALas = getDate(10);
     Date entregadoALas = getDate(40);
     PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
