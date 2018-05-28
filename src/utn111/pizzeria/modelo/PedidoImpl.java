@@ -11,11 +11,14 @@ public class PedidoImpl implements Pedido {
   private Estado estado;
   private Item[] items;
 
-  public PedidoImpl(ClienteImpl cliente, Date pedidoALas, Date entregadoALas, Estado estado, Item[] items) {
+  public PedidoImpl(ClienteImpl cliente, Date pedidoALas, Date entregadoALas, Estado estado) {
     this.cliente = cliente;
     this.pedidoALas = pedidoALas;
     this.entregadoALas = entregadoALas;
     this.estado = estado;
+  }
+
+  public void setItems(Item[] items) {
     this.items = items;
   }
 
@@ -57,9 +60,12 @@ public class PedidoImpl implements Pedido {
   }
 
   public static class ItemImpl implements Pedido.Item {
-    private PedidoDao pedido;
+    private Pedido pedido;
+    private Pizza pizza;
+    private String tamaño;
+    private int cantidad;
 
-    public ItemImpl(Pedido pedido, Pizza pizza, String nombrePizza, String tamaño, int cantidad) {
+    public ItemImpl(Pedido pedido, Pizza pizza, String tamaño, int cantidad) {
     }
 
     @Override
@@ -74,7 +80,7 @@ public class PedidoImpl implements Pedido {
 
     @Override
     public String getNombrePizza() {
-      return nombrePizza;
+      return pizza.getNombre();
     }
 
     @Override
