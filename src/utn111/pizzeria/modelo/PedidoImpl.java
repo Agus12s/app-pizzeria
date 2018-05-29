@@ -42,7 +42,7 @@ public class PedidoImpl implements Pedido {
   @Override
   public Duration getTiempoEstimadoEspera() {
     //FIXME AGREGAR CODIGO.
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -64,6 +64,10 @@ public class PedidoImpl implements Pedido {
     private int cantidad;
 
     public ItemImpl(Pedido pedido, Pizza pizza, String tamaño, int cantidad) {
+      this.pedido = pedido;
+      this.pizza = pizza;
+      this.tamaño = tamaño;
+      this.cantidad = cantidad;
     }
 
     @Override

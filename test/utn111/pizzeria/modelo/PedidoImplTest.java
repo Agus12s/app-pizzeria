@@ -99,7 +99,8 @@ public class PedidoImplTest {
     PizzaDao pizzaDao = new PizzaDao();
     pizzaDao.setId(10);
     pizzaDao.setNombre("muzzarella");
-    itemList.add(new PedidoImpl.ItemImpl(pedido, new PizzaImpl(pizzaDao), "pequeña", 4));
+    PedidoImpl.ItemImpl item = new PedidoImpl.ItemImpl(pedido, new PizzaImpl(pizzaDao), "pequeña", 4);
+    itemList.add(item);
     return itemList.toArray(new Pedido.Item[1]);
   }
 }
