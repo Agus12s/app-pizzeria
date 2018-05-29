@@ -11,14 +11,11 @@ public class PedidoImpl implements Pedido {
   private Estado estado;
   private Item[] items;
 
-  public PedidoImpl(ClienteImpl cliente, Date pedidoALas, Date entregadoALas, Estado estado) {
+  public PedidoImpl(ClienteImpl cliente, Date pedidoALas, Date entregadoALas, Estado estado, Item[] items) {
     this.cliente = cliente;
     this.pedidoALas = pedidoALas;
     this.entregadoALas = entregadoALas;
     this.estado = estado;
-  }
-
-  public void setItems(Item[] items) {
     this.items = items;
   }
 

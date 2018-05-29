@@ -7,15 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import utn111.pizzeria.modelo.ClienteDao;
-import utn111.pizzeria.modelo.ClienteImpl;
-import utn111.pizzeria.modelo.Pedido;
-import utn111.pizzeria.modelo.PedidoImpl;
-import utn111.pizzeria.modelo.PedidoImpl.ItemImpl;
-import utn111.pizzeria.modelo.Pizza;
-import utn111.pizzeria.modelo.PizzaDao;
-import utn111.pizzeria.modelo.PizzaImpl;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
@@ -50,17 +41,17 @@ public class PedidoImplTest {
 
   @Test
   public void testPedidoAlmacenaTodosLosItems() {
-    PedidoImpl pedido = createAndSetPedidoImpl();
+    PedidoImpl pedido = null;
     Pedido.Item[] items = createItems(pedido);
-    pedido.setItems(items);
+    pedido = createAndSetPedidoImpl(items);
     assertEquals(items.length, pedido.getItems().length);
     assertSame(items, pedido.getItems());
   }
 
   private PedidoImpl createAndSetPedidoImpl(Date pedidoALas, Date entregadoALas) {
     ClienteImpl cliente = new ClienteImpl(createDao());
-    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
-    pedido.setItems(createItems(pedido));
+    PedidoImpl pedido = null;
+    pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA, createItems(pedido));
     return pedido;
   }
 
@@ -68,8 +59,8 @@ public class PedidoImplTest {
     ClienteImpl cliente = new ClienteImpl(createDao());
     Date pedidoALas = getDate(10);
     Date entregadoALas = getDate(40);
-    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
-    pedido.setItems(items);
+    PedidoImpl pedido = null;
+    pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA, items);
     return pedido;
   }
 
@@ -77,16 +68,16 @@ public class PedidoImplTest {
     ClienteImpl cliente = new ClienteImpl(createDao());
     Date pedidoALas = getDate(10);
     Date entregadoALas = getDate(40);
-    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
-    pedido.setItems(createItems(pedido));
+    PedidoImpl pedido = null;
+    pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA, createItems(pedido));
     return pedido;
   }
 
   private PedidoImpl createAndSetPedidoImpl(ClienteImpl cliente){
     Date pedidoALas = getDate(10);
     Date entregadoALas = getDate(40);
-    PedidoImpl pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA);
-    pedido.setItems(createItems(pedido));
+    PedidoImpl pedido = null;
+    pedido = new PedidoImpl(cliente, pedidoALas, entregadoALas, Pedido.Estado.PEDIDA, createItems(pedido));
     return pedido;
   }
 
